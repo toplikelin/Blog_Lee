@@ -12,23 +12,23 @@
         <div class="contact-info-section">
           <h2 class="section-title">直接联系</h2>
           <div class="info-cards">
-            <a href="mailto:1020496019@qq.com" class="info-card email">
+            <div class="info-card email">
               <div class="card-icon">📧</div>
               <div class="card-content">
                 <h3>邮箱</h3>
                 <p>1020496019@qq.com</p>
               </div>
-              <span class="card-arrow">→</span>
-            </a>
+              <span class="card-copy" @click="copyText('1020496019@qq.com', '邮箱地址')">复制</span>
+            </div>
 
-            <a href="tel:15208311957" class="info-card phone">
+            <div class="info-card phone">
               <div class="card-icon">📱</div>
               <div class="card-content">
                 <h3>电话</h3>
                 <p>15208311957</p>
               </div>
-              <span class="card-arrow">→</span>
-            </a>
+              <span class="card-copy" @click="copyText('15208311957', '电话号码')">复制</span>
+            </div>
 
             <div class="info-card wechat">
               <div class="card-icon">💬</div>
@@ -36,7 +36,7 @@
                 <h3>微信</h3>
                 <p>账号：15208311957</p>
               </div>
-              <span class="card-copy" @click="copyWechat">复制</span>
+              <span class="card-copy" @click="copyText('15208311957', '微信号')">复制</span>
             </div>
           </div>
         </div>
@@ -46,12 +46,12 @@
 </template>
 
 <script setup>
-const copyWechat = async () => {
+const copyText = async (text, label) => {
   try {
-    await navigator.clipboard.writeText('15208311957')
-    alert('微信号已复制到剪贴板！')
+    await navigator.clipboard.writeText(text)
+    alert(`${label}已复制到剪贴板！`)
   } catch {
-    alert('微信号：15208311957')
+    alert(`${label}：${text}`)
   }
 }
 </script>
@@ -153,21 +153,8 @@ const copyWechat = async () => {
   color: var(--text-primary);
 }
 
-.card-arrow {
-  color: var(--text-light);
-  font-size: 1.25rem;
-  transition: transform var(--transition-fast);
-}
-
-.info-card:hover .card-arrow {
-  transform: translateX(4px);
-  color: var(--primary-color);
-}
-
 .card-copy {
   padding: 0.375rem 0.875rem;
-  background: rgba(7, 193, 96, 0.1);
-  color: #07c160;
   border-radius: var(--radius-md);
   font-size: 0.875rem;
   font-weight: 500;
@@ -176,7 +163,32 @@ const copyWechat = async () => {
   flex-shrink: 0;
 }
 
-.card-copy:hover {
+.info-card.email .card-copy {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+
+.info-card.email .card-copy:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.info-card.phone .card-copy {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.info-card.phone .card-copy:hover {
+  background: #10b981;
+  color: white;
+}
+
+.info-card.wechat .card-copy {
+  background: rgba(7, 193, 96, 0.1);
+  color: #07c160;
+}
+
+.info-card.wechat .card-copy:hover {
   background: #07c160;
   color: white;
 }
