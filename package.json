@@ -1,20 +1,20 @@
 {
-  "name": "blog-site",
+  "name": "blog-low-version",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
+  "description": "个人博客低版本兼容方案 (Node.js 12 + Vite 2.x + Vue 3)",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0",
-    "pinia": "^2.1.7"
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6",
+    "pinia": "^2.0.30"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.1.5"
+    "@vitejs/plugin-vue": "^2.3.4",
+    "vite": "^2.9.18"
   }
 }
