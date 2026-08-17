@@ -15,7 +15,6 @@
           active-class="active"
           @click="closeMenu"
         >
-          <span class="nav-icon">{{ item.icon }}</span>
           <span class="nav-text">{{ item.name }}</span>
         </router-link>
       </nav>
@@ -38,10 +37,10 @@ const isScrolled = ref(false)
 const isMenuOpen = ref(false)
 
 const menuItems = [
-  { path: '/', name: '首页', icon: '🏠' },
-  { path: '/career', name: '职业经历', icon: '💼' },
-  { path: '/blog', name: '博客文章', icon: '📝' },
-  { path: '/contact', name: '联系方式', icon: '📧' }
+  { path: '/', name: '首页' },
+  { path: '/career', name: '职业经历' },
+  { path: '/blog', name: '博客文章' },
+  { path: '/contact', name: '联系方式' }
 ]
 
 const handleScroll = () => {

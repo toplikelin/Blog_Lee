@@ -122,7 +122,6 @@ const skillCategories = [
     color: '#42b883',
     skills: [
       { name: 'Vue.js', years: 5, level: 95 },
-      { name: 'React', years: 3, level: 88 },
       { name: 'JavaScript/TypeScript', years: 9, level: 95 },
       { name: 'CSS/Sass/Less', years: 9, level: 90 }
     ]
@@ -135,7 +134,7 @@ const skillCategories = [
       { name: 'Ruby on Rails', years: 6, level: 85 },
       { name: 'Node.js/Express', years: 4, level: 82 },
       { name: 'Java/Spring Boot', years: 1, level: 75 },
-      { name: 'MySQL/PostgreSQL', years: 6, level: 80 }
+      { name: 'MySQL', years: 6, level: 80 }
     ]
   },
   {
