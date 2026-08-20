@@ -90,23 +90,23 @@ export const useBlogStore = defineStore('blog', {
 
     experiences: [
       {
-        period: '2015 - 至今',
-        title: '高级前端开发工程师',
-        company: '某互联网公司',
+        period: '2018.1 - 2018.7',
+        title: '前端工程师',
+        company: '菲迪克网络工程管理系统 ',
         description: '负责公司核心产品的前端架构设计和开发，主导多个大型项目从0到1的建设，带领团队完成技术选型和代码规范制定。',
-        highlights: ['Vue.js', 'React', '微前端', '性能优化']
+        highlights: ['Vue.js', 'JQUERY', 'bootstrap', 'echarts', 'vue2全家桶', 'AngularJS']
       },
       {
-        period: '2018 - 至今',
+        period: '2018.8 - 2025.3',
         title: 'Ruby on Rails 全栈工程师',
-        company: '某SaaS公司',
+        company: '四川和生视界医药技术开发有限公司+数采小博科技发展有限公司',
         description: '参与公司SaaS平台的后端开发，使用Rails框架构建高可用的API服务，设计合理的数据库结构，实现业务逻辑。',
-        highlights: ['Rails API', 'PostgreSQL', 'Redis', 'Docker']
+        highlights: ['Ruby on Rails', 'h5', 'JQUERY', 'Docker', 'bootstrap3', 'redis', 'rabbitMq', 'echarts' ,'vue2全家桶', 'AngularJS', 'node.js']
       },
       {
-        period: '2022 - 至今',
+        period: '2024.10 - 2025.3',
         title: 'Java 后端工程师',
-        company: '某金融科技公司',
+        company: '数采小博科技发展有限公司',
         description: '参与支付系统的开发和维护，使用Spring Boot构建微服务，保证系统的高可用性和数据一致性。',
         highlights: ['Spring Boot', 'MySQL', '消息队列', '分布式系统']
       }

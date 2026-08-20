@@ -48,6 +48,20 @@
                   {{ tag }}
                 </span>
               </div>
+              <button class="detail-btn" @click="toggleDetail(index)">
+                {{ activeDetail === index ? '收起详情' : '详细' }}
+                <span class="detail-arrow" :class="{ up: activeDetail === index }">▼</span>
+              </button>
+              <transition name="detail-slide">
+                <div class="detail-panel" v-show="activeDetail === index">
+                  <div class="detail-project" v-for="(project, pi) in exp.details" :key="pi">
+                    <h4 class="project-name">{{ project.name }}</h4>
+                    <p class="project-line" v-for="(line, li) in project.lines" :key="li">
+                      {{ line }}
+                    </p>
+                  </div>
+                </div>
+              </transition>
             </div>
           </div>
         </div>
@@ -110,10 +124,137 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useBlogStore } from '../stores/blog'
 
 const blogStore = useBlogStore()
 const experiences = blogStore.experiences
+
+const activeDetail = ref(-1)
+const toggleDetail = (index) => {
+  activeDetail.value = activeDetail.value === index ? -1 : index
+}
+
+// 为每条工作经历补充详细信息
+experiences[0].details = [
+  {
+    name: '1. 菲迪克网络工程管理系统(华东电气集团)',
+    lines: [
+      '运用css的bookstrap ,HTML页面开发，实现静态页面的展示',
+      'ztree组件开发对应的目录树和和相应的管理菜单，实现与用户的用户交互',
+      '基于js的JQUERY的列表异步刷新组件jqgrid，实现与用户的动态交互',
+      'ajax获取后台相应数据，JSP的el表达式获取对象和相应值写入页面进行对应数据的展示，实现与用户的用户交互',
+      '最后配合测试进行调试，对相应的bug进行修改处理'
+    ]
+  },
+  {
+    name: '2. 新药读片平台(四川和生视界医药技术开发有限公司)',
+    lines: [
+      'a.pc端显示AngularJS通过实现对志愿者服用药物之后的眼睛图像变化记录，图像通过阿里云相关api上传到云平台，后因公司需要改为rails框架',
+      '定时任务上传部分图片到图像管理系统，管理员对不同药物的创建项目相应的配置，配合读片人员观测结果',
+      'b.后因需要进行平台移植和部分功能的重构，同时增加病患注册和查看用药计量和最终报告结果等功能',
+      '通过vue2 vuex vueRoute bootstrap3 element.ui(患者端页面使用) Axios（配合后台java）等技术增加患者界面'
+    ]
+  }
+]
+experiences[1].details = [
+  {
+    name: '1. 武汉大学福利平台(数采小博科技发展有限公司)',
+    lines: [
+      '武汉大学对教职工人员发送福利积分，购物的saas电商平台',
+      '通过Ruby on Rails框架采购端实现用积分或线上支付的方式进行购物下单',
+      '供应商端在供应商菜单实现对本地供应商商品上传，审核，订单的查看，审核，售后处理等功能',
+      '同时通过gem电商api对商品的基本信息，价格，图片，库存，商品类型等进行把控',
+      '下单后继续通过api将订单预占库存，下单成功或失败，物流信息，完成订单，售后服务等流程与供应商进行交互',
+      '管理人员定期或按需进行积分发放，订单管理，售后问题处理，数据汇总和图表通过Echart实现',
+      '商品数据和订单状态数据维护通过定时任务更新',
+      '手机端只有采购端，且与pc端采购端类似',
+      '工作内容：负责pc端，手机端页面调整，修改，问题处理，数据维护和导出统计，对接新电商api和对部分电商个性化处理',
+      '功能开发和以前功能二次开发以及优化'
+    ]
+  },
+  {
+    name: '2. 中国航空集团(中航)，中国航空发动机集团(航发)对公商城采购(数采小博科技发展有限公司)',
+    lines: [
+      '通过Ruby on Rails框架采购端实现商品下单，同步比价，全网比价，商品议价，热门商品，优选供应商商品推荐等相关商品功能。',
+      '供应商端在供应商菜单实现对本地供应商商品上传，审核，订单的查看，审核，售后处理。',
+      '全网比价报价，报价商品审核，未中标原因以及二次报价，商品议价报价流程。本地供应商，推优供应商相关比价功能。',
+      '管理后台对商城公告，活动和一些基本配置，还需对商品，比价商品，报价进行审核。订单审核通过api和redis获取中航平台审批结果',
+      '全网比价报价，报价商品审核，未中标原因以及二次报价，商品议价报价流程。本地供应商，推优供应商相关比价功能。',
+      '商品数据和订单状态数据维护通过定时任务更新',
+      '参与需求评审和讨论，对需求开发提出意见和建议。pc端页面调整，修改，问题处理。负责商城订单整个流程重构，全网比价，商品议价功能优化。部分配置项模块开发，商城商品详情页面重构。',
+      '历史商品价格统计功能展示，售后功能开发，电商api联调以及问题解答处理,还有对部分个性化电商（京东，苏宁）进行api开发',
+      '测试部分：对功能所设计的地方进行测试用例编写，然后进行简单的测试，最后根据测试结果提出bug。对流程和需求未考虑到的问题及时反馈，最后生成相应的测试报告'
+    ]
+  },
+  {
+    name: '3.施耐德电器对公商城采购(数采小博科技发展有限公司)',
+    lines: [
+      '通过Ruby on Rails框架采购端实现商品下单，同步比价，全网比价，商品议价，热门商品，优选供应商商品推荐等相关商品功能。',
+      '采购人还可发起商品寻源，物流寻源，图纸件寻源，供应商为相应寻源需求提供合适的商品以及报价，由采购人选择',
+      '供应商端可查看商品，订单，报价流程状态。寻源报价和订单审核通过api分别向两个对应平台获取结果，也可以通过定时任务获取',
+      '管理后台对商城公告，活动和一些基本配置。对商品进行审核，上下架等操作。',
+      '工作内容：参与需求评审和讨论，对需求开发提出意见和建议。pc端页面调整，修改，问题处理。物流寻源，图纸件寻源进行二次开发，对接新电商api和对部分电商个性化处理。',
+      'csp安全对所有模块进行优化，合并下单，购物车开发，部分模块优化，对接其他平台api开发以及优化。'
+    ]
+  },
+  {
+    name: '4.银海眼科官网，pc和移动端维护页面和更新通告等(四川和生视界医药技术开发有限公司)',
+    lines: [
+      '银海眼科官网，pc和移动端维护页面和更新通告等'
+    ]
+  },
+  {
+    name: '5.新药读片平台(四川和生视界医药技术开发有限公司)',
+    lines: [
+      'pc端通过实现对志愿者服用药物之后的眼睛图像变化记录，图像通过阿里云相关api上传到云平台',
+      '定时任务上传部分图片到图像管理系统，管理员对不同药物的创建项目相应的配置，配合读片人员观测结果',
+      '移动端通过微信公众号api将档案消息发送给读片员，从而进行下一步流程，mina脚本实现简易脚本部署。',
+      '后因需要进行平台移植和部分功能的重构，同时增加病患注册和查看用药计量和最终报告结果等功能。',
+      '通过vue2 vuex vueRoute bootstrap3 element.ui(患者端页面使用) Axios（配合后台java）等技术增加患者界面'
+    ]
+  },
+  {
+    name: '6.远程读片平台(四川和生视界医药技术开发有限公司)',
+    lines: [
+      'pc端让读片人员上传，下载，审批，查看读片，自动或手动修改读片结果。通过阿里云api将有价值的图片上传至云平台',
+      '移动端通将读片流程信息通知发送以及相关信息发送给读片员和患者'
+    ]
+  },
+  {
+    name: '7.眼健康档案(四川和生视界医药技术开发有限公司)',
+    lines: [
+      'pc端实现医护人员对患者档案电子化，同时对中小学生的眼健康进行年度管理。',
+      '管理员对检查项目模板和账号管理的配置，rabbitMq与ruby定时任务上传部分图片到图像管理系统',
+      '移动端通过微信公众号api将部分活动消息以及档案消息和结果报告展示给用户'
+    ]
+  },
+  {
+    name: '8.Galax 图像汇聚管理系统(四川和生视界医药技术开发有限公司)',
+    lines: [
+      'pc端通过vue和Ruby on Rails框架对图片进行管理'
+    ]
+  },
+  {
+    name: '9.西科通信科技公司管理系统（外包）(四川和生视界医药技术开发有限公司)',
+    lines: [
+      '实现的劳务外包平台，功能包括框架协议，项目立项，第三方劳务平台管理，劳务人员管理',
+      '背靠背项目成本金额计算，发票对账计算等功能'
+    ]
+  }
+]
+experiences[2].details = [
+  {
+    name: '1. 成都地铁劳保，福利电商平台(数采小博科技发展有限公司)',
+    lines: [
+      '通过java分布式部署，redis管理线程',
+      'springBoot管理各模块，完成商品审核，上下架处理，订单所有流程的处理',
+      '商品由中台统一审核并处理，同时对采购人发放积分进行购物',
+      '集成消息队列实现异步解耦，系统吞吐量提升3倍',
+      '参与需求评审和讨论，对需求开发提出意见和建议。pc端页面调整，修改，问题处理'
+    ]
+  }
+]
 
 const skillCategories = [
   {
@@ -121,7 +262,7 @@ const skillCategories = [
     icon: '🎨',
     color: '#42b883',
     skills: [
-      { name: 'Vue.js', years: 5, level: 95 },
+      { name: 'Vue.js', years: 2, level: 70 },
       { name: 'JavaScript/TypeScript', years: 9, level: 95 },
       { name: 'CSS/Sass/Less', years: 9, level: 90 }
     ]
@@ -132,8 +273,8 @@ const skillCategories = [
     color: '#cc342d',
     skills: [
       { name: 'Ruby on Rails', years: 6, level: 85 },
-      { name: 'Node.js/Express', years: 4, level: 82 },
-      { name: 'Java/Spring Boot', years: 1, level: 75 },
+      { name: 'Node.js/Express', years: 1, level: 60 },
+      { name: 'Java/Spring Boot', years: 0.5, level: 50 },
       { name: 'MySQL', years: 6, level: 80 }
     ]
   },
@@ -143,8 +284,8 @@ const skillCategories = [
     color: '#f59e0b',
     skills: [
       { name: 'Git/GitHub', years: 8, level: 92 },
-      { name: 'Webpack/Vite', years: 5, level: 85 },
-      { name: 'Docker', years: 3, level: 78 },
+      { name: 'Webpack/Vite', years: 2, level: 70 },
+      { name: 'Docker', years: 1, level: 60 },
       { name: 'CI/CD', years: 4, level: 80 }
     ]
   },
@@ -154,7 +295,7 @@ const skillCategories = [
     color: '#8b5cf6',
     skills: [
       { name: 'RESTful API设计', years: 6, level: 88 },
-      { name: '微服务架构', years: 3, level: 82 },
+      { name: '微服务架构', years: 0.5, level: 50 },
       { name: 'Redis缓存', years: 5, level: 85 },
       { name: '消息队列', years: 3, level: 78 }
     ]
@@ -346,6 +487,100 @@ const skillCategories = [
   padding: 0.375rem 0.75rem;
   border-radius: var(--radius-md);
   font-size: 0.8125rem;
+}
+
+.detail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.75rem;
+  padding: 0.375rem 0.875rem;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--primary-color);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.detail-btn:hover {
+  background: rgba(37, 99, 235, 0.15);
+}
+
+.detail-arrow {
+  font-size: 0.625rem;
+  transition: transform 0.3s ease;
+}
+
+.detail-arrow.up {
+  transform: rotate(180deg);
+}
+
+.detail-panel {
+  margin-top: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--primary-color);
+}
+
+.detail-project {
+  padding: 0.5rem 0;
+}
+
+.detail-project:not(:last-child) {
+  border-bottom: 1px dashed #e2e8f0;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.project-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.project-line {
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  padding-left: 0.75rem;
+  position: relative;
+  margin-bottom: 0.25rem;
+}
+
+.project-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  opacity: 0.5;
+}
+
+.detail-slide-enter-active,
+.detail-slide-leave-active {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.detail-slide-enter-from,
+.detail-slide-leave-to {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.detail-slide-enter-to,
+.detail-slide-leave-from {
+  max-height: 500px;
+  opacity: 1;
 }
 
 .skills-detail {

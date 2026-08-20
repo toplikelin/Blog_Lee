@@ -164,12 +164,12 @@ const copyText = async (text, label) => {
 }
 
 .info-card.email .card-copy {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
 }
 
 .info-card.email .card-copy:hover {
-  background: #2563eb;
+  background: #10b981;
   color: white;
 }
 
